@@ -1,7 +1,10 @@
 import laddersandsnakes
 from laddersandsnakes import*
+import checkers
+from checkers import*
 from openpyxl import Workbook
 from openpyxl import load_workbook
+
 
 #===============================functions====================
 def inpt(x):
@@ -134,11 +137,11 @@ def Select_a_game(level):
         chose4= button_2("Exit",340,300,125,60,colors['red'],colors['red_l'],'4')
         print(num)
         if 1==chose1:
-             #level,p_1,p_2,Q_1,Q_2=game_loop(level,main_menu)
-             p_1,p_2,Q_1,Q_2=8,9,10,10
+             level,p_1,p_2,Q_1,Q_2=game_loop(level,main_menu)
+             #p_1,p_2,Q_1,Q_2=8,9,10,10
              return level,p_1,p_2,Q_1,Q_2,1
         if 2==chose2:
-             #level,p_1,p_2,Q_1,Q_2=game_loop(level,main_menu)
+             level,Q_1,Q_2,p_1,p_2=rival(level,main_menu)
              return level,p_1,p_2,Q_1,Q_2,2
         if 3==chose3:
              return level,p_1,p_2,Q_1,Q_2
@@ -358,12 +361,11 @@ def Counselor_():
 
                 for i in range(3):
                      Message_(str(i+1),640,240+(i*20))#מסד  
-                     Message_(str(ages[i]),500,240+(i*20))       
-                     Message_(str(avg_per_age(ages[i],games[0])),200,240+(i*20))
-                     Message_(str(avg_per_age(ages[i],games[1])),100,240+(i*20))
+                     Message_(str(ages[i]),520,240+(i*20))       
+                     Message_(str(avg_per_age(ages[i],games[0])),310,240+(i*20))
+                     Message_(str(avg_per_age(ages[i],games[1])),90,240+(i*20))
                 #Message_(round(((avg_per_age(ages[0],games[0])+avg_per_age(ages[1],games[0])+avg_per_age(ages[2],games[0]))/3),2),400,500)
                 #Message_(round(((avg_per_age(ages[0],games[1])+avg_per_age(ages[1],games[1])+avg_per_age(ages[2],games[1]))/3),2),400,560)
-                #Message_(avg_per_age(ages[i],games[1]),300,220+(i*20))
                 button("Back",130,500,125,60,colors['gray_l'],colors['gray'],main_menu)
                 button("Exit",580,500,125,60,colors['gray_l'],colors['gray'],QuitTheGame)
                

@@ -18,9 +18,9 @@ panel_width = panel_height = 75
 
 ######################## IMAGES ########################
 
-pygame.display.set_caption('Checkers')  # set title of the window
-checkersIconImg = pygame.image.load('checkers_icon.png')
-pygame.display.set_icon(checkersIconImg)
+#pygame.display.set_caption('Checkers')  # set title of the window
+#checkersIconImg = pygame.image.load('checkers_icon.png')
+#pygame.display.set_icon(checkersIconImg)
 BoardGameImg = pygame.image.load('checkerboard.png') # load background
 RivalImg = pygame.image.load('rival_screen.png') # load choose rival screen background
 DifficultyImg = pygame.image.load('difficulty.png') # load choose difficulty screen background
@@ -963,6 +963,6 @@ def rival(level_quastion = 1, back = None):
     return level_quastion, white_quastions, black_quastions, white_ans, black_ans
 
 
-rival()
-pygame.quit()
-quit()
+#rival()
+#pygame.quit()
+#quit()
