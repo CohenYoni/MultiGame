@@ -357,10 +357,10 @@ def Counselor_():
                 gameDisplay.blit(TextSurf, TextRect)
 
                 for i in range(3):
-                     Message_(str(i+1),640,220+(i*20))#מסד  
-                     Message_(str(ages[i]),480,220+(i*20))       
-                     Message_(str(avg_per_age(ages[i],games[0])),300,220+(i*20))
-                     Message_(str(avg_per_age(ages[i],games[1])),300,220+(i*20))
+                     Message_(str(i+1),640,240+(i*20))#מסד  
+                     Message_(str(ages[i]),500,240+(i*20))       
+                     Message_(str(avg_per_age(ages[i],games[0])),200,240+(i*20))
+                     Message_(str(avg_per_age(ages[i],games[1])),100,240+(i*20))
                 #Message_(round(((avg_per_age(ages[0],games[0])+avg_per_age(ages[1],games[0])+avg_per_age(ages[2],games[0]))/3),2),400,500)
                 #Message_(round(((avg_per_age(ages[0],games[1])+avg_per_age(ages[1],games[1])+avg_per_age(ages[2],games[1]))/3),2),400,560)
                 #Message_(avg_per_age(ages[i],games[1]),300,220+(i*20))

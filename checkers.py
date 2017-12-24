@@ -854,15 +854,15 @@ def checkers_loop(level_quastion = 1, playerBlack_type = 'cpu', playerWhite_type
                         was_correct = question_Israel_earth(level_quastion)
                         time.sleep(2)
                         update_display(board)
-                        if turn == 'white' and player_white['type'] == 'human':
+                        if turn != 'white' and player_white['type'] == 'human':
                             player_white['update_questions']()
                             player_white['update_answers'](was_correct)
-                        if turn == 'black' and player_black['type'] == 'human':
+                        if turn != 'black' and player_black['type'] == 'human':
                             player_black['update_questions']()
                             player_black['update_answers'](was_correct)
 
         button("Back", 620, 430, 125, 60, colors['gray_l'], colors['gray'], back)
-        button("Exit", 620, 520, 125, 60, colors['gray_l'], colors['gray'], pygame.quit)
+        button("Exit", 620, 520, 125, 60, colors['gray_l'], colors['gray'], QuitTheGame)
         if player_black['type'] == 'human':
             text("Black: {0}/{1}".format(player_black['get_questions'](), player_black['get_answers']()), 620, 200)
         text("White: {0}/{1}".format(player_white['get_answers'](), player_white['get_questions']()), 620, 240)

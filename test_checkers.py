@@ -4,11 +4,10 @@ import pygame
 
 class TestChecker(unittest.TestCase):
 
-    def test_piece(self):
+    def test_new_piece(self):
         print ('get piece now testing...')
-        self.assertEquals(checkers.piece('black', 3, False), {'color': 'black', 'SN': 3, 'king': False}, 'simple piece not created correctly')
-        self.assertEquals(checkers.piece('white', 2, True), {'color': 'white', 'SN': 2, 'king': True}, 'king piece not created correctly')
-
+        self.assertEquals(checkers.new_piece('black', 3, False), {'color': 'black', 'SN': 3, 'king': False}, 'simple piece not created correctly')
+        self.assertEquals(checkers.new_piece('white', 2, True), {'color': 'white', 'SN': 2, 'king': True}, 'king piece not created correctly')
 
     def test_init_board(self):
         print('initial board now testing...')
@@ -73,4 +72,27 @@ class TestChecker(unittest.TestCase):
         self.assertEquals(new_board[1][0], None, 'the piece dosnt remove from old position')
         self.assertEquals(new_board[0][1]['king'], True, 'the white king dosnt create')
         self.assertEquals(new_board[7][0]['king'], True, 'the black king dosnt create')
+
+    def test_count_pieces(self):
+        board = [
+            [None, None, None, None, None, None, None, None],
+            [{'color': 'white', 'SN': 1, 'king': False}, None, None, None, None, None, None, None],
+            [None, None, None, {'color': 'black', 'SN': 3, 'king': False}, None, None, None, None],
+            [None, None, None, None, None, None, None, None],
+            [None, None, None, None, None, None, None, None],
+            [None, None, {'color': 'white', 'SN': 4, 'king': False}, None, None, None, None, None],
+            [None, {'color': 'black', 'SN': 2, 'king': False}, None, None, None, None, None, None],
+            [None, None, None, None, None, None, None, None],
+        ]
+        self.assertEquals(checkers.count_pieces(board), (2,2), 'counter of players not done correctly')
+
+    def test_player_check(self):
+        player1 = checkers.new_player('human', 'white', 'nagamax', 6)
+        player2 = checkers.new_player('cpu', 'white', 'nagamax', 6)
+        self.assertEqual(checkers.player_check(player1,player2), (player1,player2), 'type of players not change correctly')
+
+
+
+
+
 
