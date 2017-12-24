@@ -72,7 +72,7 @@ Ques={1:(pygame.image.load('pic_Question\Q_ (1).png'),4),
       
 #==============(פונקציות שאלות)============
 
-def Question_Israel_earth(level):
+def question_Israel_earth(level):
         time.sleep(0.2)
         loop= True
         Ans=0
@@ -105,12 +105,10 @@ def Question_Israel_earth(level):
                         if Ans==Ques[Q][1]:
                                 gameDisplay.blit(T_IMG,(0,0))
                                 pygame.display.update()
-                                time.sleep(2) 
                                 return True
                         else:
                                 gameDisplay.blit(F_IMG,(0,0))
                                 pygame.display.update()
-                                time.sleep(2) 
                                 return False
                 pygame.display.update()
-                clock.tick(15)
+                clock.tick(20)
