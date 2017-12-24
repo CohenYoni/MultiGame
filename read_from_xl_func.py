@@ -11,7 +11,9 @@ def read_from_xl(file_name, sheet_number = 0):
         rows.append(cells)
     workbook.save(file_name)
     return rows
-a = read_from_xl('test.xlsx')
-for i in range(len(a)):
-    if a[i][0] == 'shimon' and a[i][1] == 'desta':
-        print('found')
+
+a = read_from_xl('Date.xlsx')
+print(a)
+for i in a:
+    print(i)
+        
