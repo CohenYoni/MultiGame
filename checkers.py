@@ -834,7 +834,7 @@ def mouse_click(pos, board, playerBlack, player_White):
 
 ######################## START OF GAME ########################
 
-def checkers_loop(level_quastion = 1, playerBlack_type = 'cpu', playerWhite_type = 'human', level_game = 'easy', strategy = 'alpha-beta'):
+def checkers_loop(level_quastion = 1, playerBlack_type = 'cpu', playerWhite_type = 'human', level_game = 'easy', strategy = 'alpha-beta', back = None):
     board, player_black, player_white = game_init(playerBlack_type, playerWhite_type, level_game, strategy)
     player_black, player_white = player_check(player_black, player_white)  # will check for errors in player settings
     gameDisplay.fill(colors['white'])
@@ -861,7 +861,13 @@ def checkers_loop(level_quastion = 1, playerBlack_type = 'cpu', playerWhite_type
                             player_black['update_questions']()
                             player_black['update_answers'](was_correct)
 
-        # let user know what's happening (whose turn it is)
+        button("Back", 620, 430, 125, 60, colors['gray_l'], colors['gray'], back)
+        button("Exit", 620, 520, 125, 60, colors['gray_l'], colors['gray'], pygame.quit)
+        if player_black['type'] == 'human':
+            text("Black: {0}/{1}".format(player_black['get_questions'](), player_black['get_answers']()), 620, 200)
+        text("White: {0}/{1}".format(player_white['get_answers'](), player_white['get_questions']()), 620, 240)
+
+                        # let user know what's happening (whose turn it is)
         if (turn == 'white' and player_white['type'] == 'human'):
             text('WHITE TURN', display_width - 180, display_height - 500)
             pygame.display.update()
@@ -906,7 +912,7 @@ def checkers_loop(level_quastion = 1, playerBlack_type = 'cpu', playerWhite_type
         return level_quastion, player_white['get_questions'](), player_black['get_questions'](), player_white['get_answers'](), player_black['get_answers']()
 
 
-def difficulty_cpu(level_quastion = 1):
+def difficulty_cpu(level_quastion = 1, back = None):
     white_quastions = black_quastions = white_ans = black_ans = 0  # as start
     gameDisplay.fill(colors['white'])
     strategies = ['minimax', 'negascout', 'negamax', 'alpha-beta']
@@ -919,13 +925,13 @@ def difficulty_cpu(level_quastion = 1):
         gameDisplay.blit(DifficultyImg, (0, 0))
 
         if 1 == button_2("Easy", 150, 330, 100, 60, colors['gray_l'], colors['gray'], '1'):
-            level_quastion, white_quastions, black_quastions, white_ans, black_ans = checkers_loop(level_quastion, 'cpu', 'human', 'easy', strategies[strategy_chosen])
+            level_quastion, white_quastions, black_quastions, white_ans, black_ans = checkers_loop(level_quastion, 'cpu', 'human', 'easy', strategies[strategy_chosen], back)
             loopExit = True
         if 2 == button_2("Moderate", 350, 330, 100, 60, colors['gray_l'], colors['gray'], '2'):
-            level_quastion, white_quastions, black_quastions, white_ans, black_ans = checkers_loop(level_quastion, 'cpu', 'human', "moderate", strategies[strategy_chosen])
+            level_quastion, white_quastions, black_quastions, white_ans, black_ans = checkers_loop(level_quastion, 'cpu', 'human', "moderate", strategies[strategy_chosen], back)
             loopExit = True
         if 3 == button_2("Hard", 550, 330, 100, 60, colors['gray_l'], colors['gray'], '3'):
-            level_quastion, white_quastions, black_quastions, white_ans, black_ans = checkers_loop(level_quastion, 'cpu', 'human', "hard", strategies[strategy_chosen])
+            level_quastion, white_quastions, black_quastions, white_ans, black_ans = checkers_loop(level_quastion, 'cpu', 'human', "hard", strategies[strategy_chosen], back)
             loopExit = True
         pygame.display.update()
         clock.tick(fps)
@@ -933,7 +939,7 @@ def difficulty_cpu(level_quastion = 1):
     return level_quastion, white_quastions, black_quastions, white_ans, black_ans
 
 
-def rival(level_quastion = 1):
+def rival(level_quastion = 1, back = None):
     white_quastions = black_quastions = white_ans = black_ans = 0 # as start
     gameDisplay.fill(colors['white'])
     loopExit = False
@@ -945,10 +951,10 @@ def rival(level_quastion = 1):
 
 
         if 1 == button_2("Player vs Computer", 100, 430, 200, 60, colors['gray_l'], colors['gray'], '1'):
-            level_quastion, white_quastions, black_quastions, white_ans, black_ans = difficulty_cpu(level_quastion)
+            level_quastion, white_quastions, black_quastions, white_ans, black_ans = difficulty_cpu(level_quastion, back)
             loopExit = True
         if 2 == button_2("Player vs Player", 500, 430, 200, 60, colors['gray_l'], colors['gray'], '2'):
-            level_quastion, white_quastions, black_quastions, white_ans, black_ans = checkers_loop(level_quastion, 'human', 'human')
+            level_quastion, white_quastions, black_quastions, white_ans, black_ans = checkers_loop(level_quastion, 'human', 'human', 'easy', 'mimimax', back)
             loopExit = True
 
         pygame.display.update()
