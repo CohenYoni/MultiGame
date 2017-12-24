@@ -109,6 +109,20 @@ def question_Israel_earth(level):
                         else:
                                 gameDisplay.blit(F_IMG,(0,0))
                                 pygame.display.update()
+                                gameDisplay.blit(F_IMG,(0,0))
+                                pygame.display.update()
+                                time.sleep(2)
+                                gameDisplay.fill(colors['white'])
+                                gameDisplay.blit(Ques[Q][0],(220,190))
+                                largeText = pygame.font.Font('freesansbold.ttf',80)
+                                TextSurf, TextRect = text_objects("The right answer", largeText)
+                                TextRect.center = ((display_width/2),(display_height/2-200))
+                                gameDisplay.blit(TextSurf, TextRect)
+                                
+                                button(str(Ques[Q][1]),350,440,125,60,colors['gray'],colors['gray'],)
+                                
+                                pygame.display.update()
+                                time.sleep(2)
                                 return False
                 pygame.display.update()
                 clock.tick(20)

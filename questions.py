@@ -113,6 +113,22 @@ def Question(level):
                         else:
                                 gameDisplay.blit(F_IMG,(0,0))
                                 pygame.display.update()
+                                time.sleep(2)
+                                gameDisplay.fill(colors['white'])
+                                Message_2(Ques[Q][0],200,240)
+                                largeText = pygame.font.Font('freesansbold.ttf',80)
+                                TextSurf, TextRect = text_objects("The right answer", largeText)
+                                TextRect.center = ((display_width/2),(display_height/2-200))
+                                gameDisplay.blit(TextSurf, TextRect)
+                                if Ques[Q][2]==1:
+                                 button(str(Ques[Q][1][1]),350,440,125,60,colors['gray'],colors['gray'],)
+                                elif Ques[Q][2]==2:
+                                 button(str(Ques[Q][1][2]),350,440,125,60,colors['gray'],colors['gray'],)
+                                elif Ques[Q][2]==3:
+                                 button(str(Ques[Q][1][3]),350,440,125,60,colors['gray'],colors['gray'],)
+                                elif Ques[Q][2]==4:
+                                 button(str(Ques[Q][1][4]),350,440,125,60,colors['gray'],colors['gray'],)
+                                pygame.display.update()
                                 time.sleep(2) 
                                 return False
                 pygame.display.update()
