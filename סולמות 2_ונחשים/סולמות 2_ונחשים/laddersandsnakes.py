@@ -169,7 +169,6 @@ def game_loop(level=1,main_menu=None):
         k_change = 0
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                QuitTheGame()    
                 gameExit = True
             if event.type == pygame.KEYDOWN:
                 turn+=1
@@ -194,7 +193,7 @@ def game_loop(level=1,main_menu=None):
         player1['place'](x,y)  
         player2['place'](z+15,w-20 )
         button("Back",620,430,125,60,colors['gray_l'],colors['gray'],main_menu)
-        button("Exit",620,520,125,60,colors['gray_l'],colors['gray'],QuitTheGame)
+        button("Exit",620,520,125,60,colors['gray_l'],colors['gray'],pygame.quit)
 
         text("Player 1: {0}/{1}".format(player1['get_questions'](),player1['get_answers']()),620,200)
         text("Player 2: {0}/{1}".format(player2['get_questions'](),player2['get_answers']()),620,240)  

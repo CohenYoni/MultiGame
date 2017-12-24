@@ -9,11 +9,7 @@ colors={'black':(0,0,0),'white':(255,255,255),'red':(255,0,0),'red_l':(210,0,0),
 gameDisplay = pygame.display.set_mode((display_width,display_height))
 pygame.display.set_caption('Group 4')
 clock = pygame.time.Clock()
-PicExit=pygame.image.load('Pic\Exit.png')
-dataP=pygame.image.load('Pic\dataP.png')
-dataC=pygame.image.load('Pic\dataP2.png')
-Selectagame=pygame.image.load('Pic\Select_a_game.png')
-Logo=pygame.image.load('Pic\Logo2.png')
+
 #================messages==============
 def text(word,x,y,color=colors['black'],type_font=pygame.font.get_default_font(),size_font=30):
     font=pygame.font.SysFont(type_font,size_font) 
@@ -49,18 +45,6 @@ def Message_2(msg,x,y):
 
 ##pygame.font.init()
 ##myfont = pygame.font.SysFont('Comic Sans MS', 30)
-def QuitTheGame():
-            gameDisplay.fill(colors['white'])
-            gameDisplay.blit(PicExit,(0,0))
-            pygame.display.update()
-            time.sleep(3)
-            pygame.quit()
-            quit()
-
-
-
-
-
     
 #===שמירה של הנותנים====    
 def SaveData(Name,LastName,p_1,Ques,level,row,ws):
