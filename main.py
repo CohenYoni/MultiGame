@@ -207,7 +207,9 @@ def avg_per_age(age,game):
     else:
         return 0
 def grade(KidList):
-    return round((KidList[2]/KidList[3]),2)*100
+    if KidList[3]!=0:
+        return round((KidList[2]/KidList[3]),2)*100
+    else: return 0
 
 '''
 def grade(name,lastname):
