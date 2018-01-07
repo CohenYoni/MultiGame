@@ -1,5 +1,4 @@
-import Question_Israel_earth
-from Question_Israel_earth import *
+from questions import *
 from copy import deepcopy  # http://www.wellho.net/resources/ex.php4?item=y111/deepcop.py
 
 ######################## CHECKERS GAME ########################
@@ -18,25 +17,22 @@ panel_width = panel_height = 75
 
 ######################## IMAGES ########################
 
-#pygame.display.set_caption('Checkers')  # set title of the window
-#checkersIconImg = pygame.image.load('checkers_icon.png')
-#pygame.display.set_icon(checkersIconImg)
-BoardGameImg = pygame.image.load('checkerboard.png') # load background
-RivalImg = pygame.image.load('rival_screen.png') # load choose rival screen background
-DifficultyImg = pygame.image.load('difficulty.png') # load choose difficulty screen background
+BoardGameImg = pygame.image.load('Pic_checkers\checkerboard.png') # load background
+RivalImg = pygame.image.load(r'Pic_checkers\rival_screen.png') # load choose rival screen background
+DifficultyImg = pygame.image.load('Pic_checkers\difficulty.png') # load choose difficulty screen background
 
-blackPlayerImgs = {1: pygame.image.load('black_player.png'), 2: pygame.image.load('black_player.png'),
-                   3: pygame.image.load('black_player.png'), 4: pygame.image.load('black_player.png'),
-                   5: pygame.image.load('black_player.png'), 6: pygame.image.load('black_player.png'),
-                   7: pygame.image.load('black_player.png'), 8: pygame.image.load('black_player.png'),
-                   9: pygame.image.load('black_player.png'), 10: pygame.image.load('black_player.png'),
-                   11: pygame.image.load('black_player.png'), 12: pygame.image.load('black_player.png')}
-whitePlayerImgs = {1: pygame.image.load('white_player.png'), 2: pygame.image.load('white_player.png'),
-                   3: pygame.image.load('white_player.png'), 4: pygame.image.load('white_player.png'),
-                   5: pygame.image.load('white_player.png'), 6: pygame.image.load('white_player.png'),
-                   7: pygame.image.load('white_player.png'), 8: pygame.image.load('white_player.png'),
-                   9: pygame.image.load('white_player.png'), 10: pygame.image.load('white_player.png'),
-                   11: pygame.image.load('white_player.png'), 12: pygame.image.load('white_player.png')}
+blackPlayerImgs = {1: pygame.image.load(r'Pic_checkers\black_player.png'), 2: pygame.image.load(r'Pic_checkers\black_player.png'),
+                   3: pygame.image.load(r'Pic_checkers\black_player.png'), 4: pygame.image.load(r'Pic_checkers\black_player.png'),
+                   5: pygame.image.load(r'Pic_checkers\black_player.png'), 6: pygame.image.load(r'Pic_checkers\black_player.png'),
+                   7: pygame.image.load(r'Pic_checkers\black_player.png'), 8: pygame.image.load(r'Pic_checkers\black_player.png'),
+                   9: pygame.image.load(r'Pic_checkers\black_player.png'), 10: pygame.image.load(r'Pic_checkers\black_player.png'),
+                   11: pygame.image.load(r'Pic_checkers\black_player.png'), 12: pygame.image.load(r'Pic_checkers\black_player.png')}
+whitePlayerImgs = {1: pygame.image.load(r'Pic_checkers\white_player.png'), 2: pygame.image.load(r'Pic_checkers\white_player.png'),
+                   3: pygame.image.load(r'Pic_checkers\white_player.png'), 4: pygame.image.load(r'Pic_checkers\white_player.png'),
+                   5: pygame.image.load(r'Pic_checkers\white_player.png'), 6: pygame.image.load(r'Pic_checkers\white_player.png'),
+                   7: pygame.image.load(r'Pic_checkers\white_player.png'), 8: pygame.image.load(r'Pic_checkers\white_player.png'),
+                   9: pygame.image.load(r'Pic_checkers\white_player.png'), 10: pygame.image.load(r'Pic_checkers\white_player.png'),
+                   11: pygame.image.load(r'Pic_checkers\white_player.png'), 12: pygame.image.load(r'Pic_checkers\white_player.png')}
 
 ######################## VARIABLES ########################
 # odd row with even col, even row with odd col
@@ -56,14 +52,14 @@ best_move = ()  # best move for the player as determined by strategy
 # gui variables
 board_size = 8  # board is 8x8 squares
 left = 1  # left mouse button
-fps = 20  # framerate of the scene (to save cpu time)
+fps = 60  # framerate of the scene (to save cpu time)
 pause = 5  # number of seconds to pause the game for after end of game
 
 
 ######################## FUNCTIONS ########################
 
 # create a new piece
-def new_piece(color, serial_number, king=False):
+def new_piece(color, serial_number, king = False):
     '''king variable- True if king, False otherwise'''
     return {'color': color, 'SN': serial_number, 'king': king}
 
@@ -131,9 +127,9 @@ def init_board():
 def get_king(color):
     '''load king image'''
     if color == 'black':
-        return pygame.image.load('king_black.png')
+        return pygame.image.load('Pic_checkers\king_black.png')
     elif color == 'white':
-        return pygame.image.load('king_white.png')
+        return pygame.image.load('Pic_checkers\king_white.png')
 
 def place_display(row, col, color, piece_id, king = False):
     '''place a piece image on the screen'''
@@ -156,7 +152,7 @@ def update_display(board):
             if board[row][col] != empty_position: #each panel contain a tuple (color, piece ID, king or player)
                 place_display(row+1, col+1, board[row][col]['color'], board[row][col]['SN'], board[row][col]['king'])
                 # row+1, col+1: place_display begins from 1 to boarde size, include.
-    pygame.display.update()
+    #pygame.display.update()
 
 # will return array with available moves to the player on board
 def avail_moves(board, color):
@@ -438,8 +434,8 @@ def game_init(player1_type='cpu', player2_type='human', difficulty='easy', strat
     '''difficulty: hard, moderate, easy'''
     # hard difficulty
     if difficulty == 'hard':
-        black = new_player(player1_type, 'black', strategy, 8)  # init black player
-        white = new_player(player2_type, 'white', strategy, 8)  # init white player
+        black = new_player(player1_type, 'black', strategy, 6)  # init black player
+        white = new_player(player2_type, 'white', strategy, 6)  # init white player
     # moderate difficulty
     elif difficulty == 'moderate':
         black = new_player(player1_type, 'black', strategy, 4)  # init black player
@@ -794,16 +790,16 @@ def cpu_play(player, board, player_white, player_black):
     elif player['strategy'] == 'alpha-beta':
         alpha = alpha_beta(player['color'], board, 0, -10000, +10000, player_black, player_white)
 
-    #if alpha == -10000:  # no more moves available... all is lost
-        #if player['color'] == 'white':
-            #black won
-        #else:
-            #white won
+    if alpha == -10000:  # no more moves available... all is lost
+        if player['color'] == 'white':
+            return board, 'black'
+        else:
+            return board, 'white'
 
     board = make_move(best_move[0], best_move[1], board)  # make the move on board
     move_limit[1] += 1  # add to move limit
     end_turn()  # end turn
-    return board
+    return board, None # None- if there are more moves.
 
 ######################## GUI FUNCTIONS ########################
 
@@ -834,135 +830,170 @@ def mouse_click(pos, board, playerBlack, player_White):
 
 ######################## START OF GAME ########################
 
-def checkers_loop(level_quastion = 1, playerBlack_type = 'cpu', playerWhite_type = 'human', level_game = 'easy', strategy = 'alpha-beta', back = None):
+def checkers(level_quastion, white_name, black_name = None, playerBlack_type = 'cpu', playerWhite_type = 'human', level_game = 'easy', strategy = 'alpha-beta', back = None):
     board, player_black, player_white = game_init(playerBlack_type, playerWhite_type, level_game, strategy)
     player_black, player_white = player_check(player_black, player_white)  # will check for errors in player settings
     gameDisplay.fill(colors['white'])
     gameDisplay.blit(BoardGameImg, (0, 0))
     update_display(board)
     pygame.display.update()
-    gameExit = False
-    while not gameExit: # main game loop
+    gameEnded = False
+    pressed = False
+    no_more_moves = None # check if there are more moves for the computer
+    while not gameEnded: # main game loop
         for event in pygame.event.get(): # the event loop
             if event.type == pygame.QUIT: # quit game
-                gameExit = True
+                QuitTheGame()
             elif event.type == pygame.MOUSEBUTTONDOWN and event.button == left:
+                pressed = True
                 if 0 < event.pos[0] < board_width and 0 <  event.pos[1] < board_height: #if the click is in the game-board
                     was_jump = mouse_click(event.pos, board, player_black, player_white)  # mouse click
                     update_display(board)
+                    pygame.display.update()
                     if was_jump:
-                        was_correct = question_Israel_earth(level_quastion)
-                        time.sleep(2)
+                        was_correct = show_question(level_quastion, 'israel')
                         update_display(board)
+                        # if it is not the white turn- the white is the last player who answered the quastion, and the turn is flipped
                         if turn != 'white' and player_white['type'] == 'human':
                             player_white['update_questions']()
                             player_white['update_answers'](was_correct)
+                        # if it is not the black turn- the black is the last player who answered the quastion, and the turn is flipped
                         if turn != 'black' and player_black['type'] == 'human':
                             player_black['update_questions']()
                             player_black['update_answers'](was_correct)
+            elif event.type == pygame.MOUSEBUTTONUP:
+                pressed = False
 
-        button("Back", 620, 430, 125, 60, colors['gray_l'], colors['gray'], back)
-        button("Exit", 620, 520, 125, 60, colors['gray_l'], colors['gray'], QuitTheGame)
+        update_display(board)
+        button("Back", 640, 430, 125, 60, pressed, colors['gray_l'], colors['gray'], back)
+        button("Exit", 640, 520, 125, 60, pressed, colors['red_l'], colors['red'], QuitTheGame)
+        if image_button(helpImg, 675, 5, pressed):
+            instruction(Checkers_instructionImg)
+            pressed = False
+
         if player_black['type'] == 'human':
-            text("Black: {0}/{1}".format(player_black['get_questions'](), player_black['get_answers']()), 620, 200)
-        text("White: {0}/{1}".format(player_white['get_answers'](), player_white['get_questions']()), 620, 240)
+            text_display("Black: {0}/{1}".format(player_black['get_answers'](), player_black['get_questions']()), 620, 200)
+        text_display("White: {0}/{1}".format(player_white['get_answers'](), player_white['get_questions']()), 620, 240)
 
-                        # let user know what's happening (whose turn it is)
+        # let user know what's happening (whose turn it is)
         if (turn == 'white' and player_white['type'] == 'human'):
-            text('WHITE TURN', display_width - 180, display_height - 500)
-            pygame.display.update()
+            text_display('White turn', display_width - 180, display_height - 500)
         elif (turn == 'black' and player_black['type'] == 'human'):
-            text('BLACK TURN', display_width - 180, display_height - 500)
+            text_display('Black turn', display_width - 180, display_height - 500)
         else:
-            text('CPU THINKING...', display_width - 200, display_height - 500)
-
-        # check state of game
-        end = count_pieces(board)
-        if end[1] == 0:
-            if player_black['type'] == 'human':
-                message_display("Black you win!")
-            else:
-                message_display("Computer won...")
-            gameExit = True
-        elif end[0] == 0:
-            message_display("White you win!")
-            gameExit = True
-        elif move_limit[0] == move_limit[1]: # check if we breached the threshold for number of moves
-            message_display("Draw")
-            gameExit = True
-        else:
-            pygame.display.flip()  # display scene from buffer
+            text_display('Cpu thinking...', display_width - 200, display_height - 500)
+        pygame.display.update()
 
         # cpu play
         if turn == 'white' and player_white['type'] == 'cpu':
-            board = cpu_play(player_white, board, player_white, player_black)  # white cpu turn
+            board, no_more_moves = cpu_play(player_white, board, player_white, player_black)  # white cpu turn
             time.sleep(1.5)
             update_display(board)
         elif turn == 'black' and player_black['type'] == 'cpu':
-            board = cpu_play(player_black, board, player_white, player_black)  # black cpu turn
+            board, no_more_moves = cpu_play(player_black, board, player_white, player_black)  # black cpu turn
             time.sleep(1.5)
             update_display(board)
 
+        # check state of game
+        end = count_pieces(board)
+        if end[1] == 0 or no_more_moves == 'black':
+            if player_black['type'] == 'human':
+                text_center("Black you win!", display_width / 2, display_height / 2, 100)
+                pygame.display.update()
+            else:
+                text_center("Computer win!", display_width / 2, display_height / 2, 100)
+                pygame.display.update()
+            time.sleep(2)
+            gameEnded = True
+        elif end[0] == 0 or no_more_moves == 'white':
+            text_center("White you win!", display_width / 2, display_height / 2, 100)
+            pygame.display.update()
+            time.sleep(2)
+            gameEnded = True
+        elif move_limit[0] == move_limit[1]: # check if we breached the threshold for number of moves
+            text_center("Draw", display_width / 2, display_height / 2, 100)
+            pygame.display.update()
+            time.sleep(2)
+            gameEnded = True
 
+        pygame.display.flip()  # display scene from buffer
         clock.tick(fps)  # saves cpu time
 
-    if player_black['type'] == 'cpu':
-        return level_quastion, player_white['get_questions'], None, player_white['get_answers'], None
+    # add the game data to the database
+    if level_quastion == 1:
+        age = 'age 6-8'
+    elif level_quastion == 2:
+        age = 'age 8-10'
     else:
-        return level_quastion, player_white['get_questions'](), player_black['get_questions'](), player_white['get_answers'](), player_black['get_answers']()
+        age = 'age 10-12'
+    if black_name != None: # just if the black was a human
+        add_game_data_to_DB(black_name[0], black_name[1], age, player_black['get_questions'](),
+                            player_black['get_answers'](), 'Checkers', 'Land of Israel')
+    add_game_data_to_DB(white_name[0], white_name[1], age, player_white['get_questions'](),
+                        player_white['get_answers'](), 'Checkers', 'Land of Israel')
+    if back != None:
+        back()
 
 
-def difficulty_cpu(level_quastion = 1, back = None):
-    white_quastions = black_quastions = white_ans = black_ans = 0  # as start
+def difficulty_cpu(level_quastion, white_name, back = None):
+    ''' choose the difficulty of the computer '''
     gameDisplay.fill(colors['white'])
     strategies = ['minimax', 'negascout', 'negamax', 'alpha-beta']
     strategy_chosen = random.randrange(0, len(strategies)) # different strategy each game
     loopExit = False
+    pressed = False
     while not loopExit:
         for event in pygame.event.get(): # the event loop
             if event.type == pygame.QUIT: # quit game
-                loopExit = True
+                QuitTheGame()
+            elif event.type == pygame.MOUSEBUTTONDOWN and event.button == left:
+                pressed = True
+            elif event.type == pygame.MOUSEBUTTONUP:
+                pressed = False
         gameDisplay.blit(DifficultyImg, (0, 0))
 
-        if 1 == button_2("Easy", 150, 330, 100, 60, colors['gray_l'], colors['gray'], '1'):
-            level_quastion, white_quastions, black_quastions, white_ans, black_ans = checkers_loop(level_quastion, 'cpu', 'human', 'easy', strategies[strategy_chosen], back)
-            loopExit = True
-        if 2 == button_2("Moderate", 350, 330, 100, 60, colors['gray_l'], colors['gray'], '2'):
-            level_quastion, white_quastions, black_quastions, white_ans, black_ans = checkers_loop(level_quastion, 'cpu', 'human', "moderate", strategies[strategy_chosen], back)
-            loopExit = True
-        if 3 == button_2("Hard", 550, 330, 100, 60, colors['gray_l'], colors['gray'], '3'):
-            level_quastion, white_quastions, black_quastions, white_ans, black_ans = checkers_loop(level_quastion, 'cpu', 'human', "hard", strategies[strategy_chosen], back)
-            loopExit = True
+        button('Easy', display_width / 2 - 90, 330, 180, 60, pressed, colors['gray_l'], colors['gray'], checkers,
+               level_quastion, white_name, None, 'cpu', 'human', 'easy', strategies[strategy_chosen], back)
+        button("Moderate", display_width / 2 - 90, 410, 180, 60, pressed, colors['gray_l'], colors['gray'], checkers,
+               level_quastion, white_name, None, 'cpu', 'human', 'moderate', strategies[strategy_chosen], back)
+        button('Hard', display_width / 2 - 90, 490, 180, 60, pressed, colors['gray_l'], colors['gray'], checkers,
+               level_quastion, white_name, None, 'cpu', 'human', 'hard', strategies[strategy_chosen], back)
+        button("Back", 640, 430, 125, 60, pressed, colors['gray_l'], colors['gray'], back)
+        button("Exit", 640, 520, 125, 60, pressed, colors['red_l'], colors['red'], QuitTheGame)
         pygame.display.update()
         clock.tick(fps)
 
-    return level_quastion, white_quastions, black_quastions, white_ans, black_ans
 
-
-def rival(level_quastion = 1, back = None):
-    white_quastions = black_quastions = white_ans = black_ans = 0 # as start
+def rival(level_quastion, white_name, black_name = None, back = None):
+    ''' choose the rival, human or computer. '''
     gameDisplay.fill(colors['white'])
     loopExit = False
+    pressed = False
     while not loopExit:
         for event in pygame.event.get(): # the event loop
             if event.type == pygame.QUIT: # quit game
-                loopExit = True
+                QuitTheGame()
+            elif event.type == pygame.MOUSEBUTTONDOWN and event.button == left:
+                pressed = True
+            elif event.type == pygame.MOUSEBUTTONUP:
+                pressed = False
         gameDisplay.blit(RivalImg, (0, 0))
 
-
-        if 1 == button_2("Player vs Computer", 100, 430, 200, 60, colors['gray_l'], colors['gray'], '1'):
-            level_quastion, white_quastions, black_quastions, white_ans, black_ans = difficulty_cpu(level_quastion, back)
-            loopExit = True
-        if 2 == button_2("Player vs Player", 500, 430, 200, 60, colors['gray_l'], colors['gray'], '2'):
-            level_quastion, white_quastions, black_quastions, white_ans, black_ans = checkers_loop(level_quastion, 'human', 'human', 'easy', 'mimimax', back)
-            loopExit = True
+        button("Back", 640, 430, 125, 60, pressed, colors['gray_l'], colors['gray'], back)
+        button("Exit", 640, 520, 125, 60, pressed, colors['red_l'], colors['red'], QuitTheGame)
+        button('Player vs Computer', display_width / 2 - 150, 330, 340, 60, pressed, colors['gray_l'], colors['gray'], difficulty_cpu,
+               level_quastion, white_name, back)
+        if button("Player vs Player", display_width / 2 - 150, 410, 340, 60, pressed, colors['gray_l'], colors['gray']):
+            pressed = False
+            if black_name == None: # prevent situation that the child entered just one name
+                name2 = []
+                gameDisplay.blit(Background_menusImg, (0, 0))
+                text_center('Please enter the name of the black player', display_width / 2, 50, 44)
+                text_center('Enter the first name and then press Enter', display_width / 2, 120, 40)
+                name2.append(input_keybord(250, 150))
+                text_center('Enter the last name and then press Enter', display_width / 2, 220, 40)
+                name2.append(input_keybord(250, 250))
+                checkers(level_quastion, white_name, black_name, 'human', 'human', 'easy', 'mimimax', back)
 
         pygame.display.update()
         clock.tick(fps)
-
-    return level_quastion, white_quastions, black_quastions, white_ans, black_ans
-
-
-#rival()
-#pygame.quit()
-#quit()
