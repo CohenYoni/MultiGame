@@ -1,420 +1,246 @@
-import laddersandsnakes
-from laddersandsnakes import*
-import checkers
-from checkers import*
-from openpyxl import Workbook
-from openpyxl import load_workbook
+from laddersandsnakes import *
+from checkers import *
 
+######################## images ########################
+SelectGameImg = pygame.image.load('Pic_menu\Select_a_game.png')
+consulerImg = pygame.image.load('Pic_menu\consulerTable.png') # consuler table data
+parentImg = pygame.image.load('Pic_menu\parentTable.png') # parent table data
+Parent_instructionImg = pygame.image.load('Pic_menu\parent_instruction.png')
+Counselor_instructionImg = pygame.image.load('Pic_menu\consuler_instruction.png')
+Background_menusLargeImg = pygame.image.load('Pic_menu\BackgroundMainLarge.png')
 
-#===============================functions====================
-def inpt(x):
-    def keyboard(x,y):
-        word=''
-        pygame.display.flip()
-        default_font=pygame.font.get_default_font()
-        font=pygame.font.SysFont(default_font,30)
-        done = True
-        while done:
-            for event in pygame.event.get():
-                if event.type==pygame.QUIT:
-                    pygame.quit()
-                    quit()
-                if event.type == pygame.KEYDOWN:                      
-                    if event.key == pygame.K_a:
-                        word+=chr(event.key)
-                    if event.key == pygame.K_b:
-                        word+=chr(event.key)
-                    if event.key == pygame.K_c:
-                        word+=chr(event.key)
-                    if event.key == pygame.K_d:
-                        word+=chr(event.key)
-                    if event.key == pygame.K_e:
-                        word+=chr(event.key)
-                    if event.key == pygame.K_f:
-                        word+=chr(event.key)
-                    if event.key == pygame.K_g:
-                        word+=chr(event.key)
-                    if event.key == pygame.K_h:
-                        word+=chr(event.key)
-                    if event.key == pygame.K_i:
-                        word+=chr(event.key)
-                    if event.key == pygame.K_m:
-                        word+=chr(event.key)
-                    if event.key == pygame.K_l:
-                        word+=chr(event.key)
-                    if event.key == pygame.K_n:
-                        word+=chr(event.key)
-                    if event.key == pygame.K_o:
-                        word+=chr(event.key)
-                    if event.key == pygame.K_p:
-                        word+=chr(event.key)
-                    if event.key == pygame.K_q:
-                        word+=chr(event.key)
-                    if event.key == pygame.K_r:
-                        word+=chr(event.key)
-                    if event.key == pygame.K_s:
-                        word+=chr(event.key)
-                    if event.key == pygame.K_t:
-                        word+=chr(event.key)
-                    if event.key == pygame.K_w:
-                        word+=chr(event.key)
-                    if event.key == pygame.K_x:
-                        word+=chr(event.key)
-                    if event.key == pygame.K_y:
-                        word+=chr(event.key)
-                    if event.key == pygame.K_z:
-                        word+=chr(event.key)
-                    if event.key == pygame.K_0:
-                        word+=chr(event.key)
-                    if event.key == pygame.K_1:
-                        word+=chr(event.key)
-                    if event.key == pygame.K_2:
-                        word+=chr(event.key)
-                    if event.key == pygame.K_3:
-                        word+=chr(event.key)
-                    if event.key == pygame.K_4:
-                        word+=chr(event.key)
-                    if event.key == pygame.K_5:
-                        word+=chr(event.key)
-                    if event.key == pygame.K_6:
-                        word+=chr(event.key)
-                    if event.key == pygame.K_7:
-                        word+=chr(event.key)
-                    if event.key == pygame.K_8:
-                        word+=chr(event.key)
-                    if event.key == pygame.K_9:
-                        word+=chr(event.key)
-                    if event.key == pygame.K_KP_ENTER:
-                        done = False         
-                    if event.key == pygame.K_SPACE:
-                        word+=chr(event.key)
-                    if event.key == pygame.K_BACKSPACE:
-                        word=""
-                        pygame.draw.rect(gameDisplay, colors['gray_l'],(250,x,290,60))
-                    if event.key == pygame.K_RETURN:
-                        done = False                   
-                    gameDisplay.blit(font.render(word,True,colors['black']),(270,y))
-                    pygame.display.flip()
-        return word
-    word=""
-    LastName=""
-    pygame.draw.rect(gameDisplay, colors['gray_l'],(250,180,290,60))
-    pygame.draw.rect(gameDisplay, colors['gray_l'],(250,250,290,60))
-    if x==1:
-     text("Player 1 enter your name :",270,200) #example asking name of player1
-    if x==2:
-     text("Player 2 enter your name:",270,200) #example asking name of player2
-    if x==3:
-     text("Enter the Password:",285,200) #example asking password
-    if x==4:
-     text("Enter your Kid name:",280,200) 
-    if(x!=3):
-            pygame.draw.rect(gameDisplay, colors['gray_l'],(250,320,290,60))
-            word=keyboard(250,270)
-            LastName=keyboard(320,340)
-            return word,LastName
-    else:
-        return keyboard(250,270)  
- 
-#========= בחירת משחק ===========
-def Select_a_game(level):
-    Game_m = True
-    p_1,p_2,Q_1,Q_2=0,0,0,0
-    chose1=0
-    chose2=0
-    chose3=0
-    chose4=0
-    while Game_m:
+######################## passwords ########################
+parent_pass = ('1234', '1111')
+counselor_pass = ('12345', '11111')
+
+######################## functions ########################
+
+def main_menu():
+    ''' main menu screen '''
+    end_loop = False
+    pressed = False
+    while not end_loop:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 QuitTheGame()
-        num=0        
-        gameDisplay.fill(colors['white'])
-        gameDisplay.blit(Selectagame,(0,0))
-        chose1= button_2("Ladders and snakes",500,410,200,60,colors['gray_l'],colors['gray'],'1')
-        chose2= button_2("Checkers",130,410,125,60,colors['gray_l'],colors['gray'],'2')
-        #chose3= button_2("Back",340,230,125,60,colors['gray_l'],colors['gray'],'3')
-        chose4= button_2("Exit",340,300,125,60,colors['red'],colors['red_l'],'4')
-        print(num)
-        if 1==chose1:
-             level,p_1,p_2,Q_1,Q_2=game_loop(level,main_menu)
-             #p_1,p_2,Q_1,Q_2=8,9,10,10
-             return level,p_1,p_2,Q_1,Q_2,1
-        if 2==chose2:
-             level,Q_1,Q_2,p_1,p_2=rival(level,main_menu)
-             return level,p_1,p_2,Q_1,Q_2,2
-        if 3==chose3:
-             return level,p_1,p_2,Q_1,Q_2
-        if 4==chose4:
-            QuitTheGame()
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                pressed = True
+            elif event.type == pygame.MOUSEBUTTONUP:
+                pressed = False
+        gameDisplay.blit(Background_menusImg, (0, 0))
+        text_center("Welcome", display_width / 2, display_height / 2 - 180, 150)
+        button("Kid", 310, 230, 180, 60, pressed, colors['gray_l'], colors['gray'], Kid_)
+        button("Parent", 310, 300, 180, 60, pressed, colors['gray_l'], colors['gray'], Parent_)
+        button("Counselor", 310, 370, 180, 60, pressed, colors['gray_l'], colors['gray'], Counselor_)
+        button("Exit", 310, 440, 180, 60, pressed, colors['red_l'], colors['red'], QuitTheGame)
+        if image_button(helpImg, 255, 305, pressed):
+            instruction(Parent_instructionImg)
+            pressed = False
+        if image_button(helpImg, 255, 375, pressed):
+            instruction(Counselor_instructionImg)
+            pressed = False
+
+
         pygame.display.update()
-        clock.tick(15)
+        clock.tick(60)
 
-
-
-
-                        
-#================================               
-#============שמירה של הנותנים====    
-
-
-    
-def read_from_xl(file_name, sheet_number = 0):
-    workbook = load_workbook(file_name)
-    sheet = workbook.get_sheet_names()[sheet_number]
-    worksheet = workbook.get_sheet_by_name(sheet)
-    rows = []
-    for row in worksheet.iter_rows():
-        cells = []
-        for cell in row:
-            cells.append(cell.value)
-        rows.append(cells)
-    workbook.save(file_name)
-    return rows
-
-#a = read_from_xl('test.xlsx')
-#for i in range(len(a)):
-#    if a[i][0] == 'shimon' and a[i][1] == 'desta':
-#        print('found')
-
-
-def write_to_xl(file_name,lst):
-    wb = Workbook()
-    ws = wb.active
-    for i in lst:
-         ws.append(i) 
-    wb.save(file_name)
-
-def find_kid(name,lastname):
-    datalist=read_from_xl('Date.xlsx')
-    KidList=[]
-    for i in range(len(datalist)):
-        if datalist[i][0] == name and datalist[i][1] == lastname:
-            KidList.append(datalist[i])
-          
-    return KidList
-
-def avg_per_age(age,game):
-    sum,count=0,0
-    datalist=read_from_xl('Date.xlsx')
-    for i in range(len(datalist)):
-         if datalist[i][4]==age and datalist[i][5]==game :
-             print(grade(datalist[i]))
-             sum+=grade(datalist[i])
-             count+=1
-    if count!=0:
-        return round(sum/count,2)
-    else:
-        return 0
-def grade(KidList):
-    if KidList[3]!=0:
-        return round((KidList[2]/KidList[3]),2)*100
-    else: return 0
-
-'''
-def grade(name,lastname):
-    KidList=find_kid(name,lastname)
-    grade=[]
-    KidList[i][6]
-    for i in range(len(KidList)):
-        grade.append((grade datalist[i][2]*grade datalist[i][3])*100)
-def avarage():
-    datalist=read_from_xl('Date.xlsx')
-    for i in range(len(datalist)):
-        sum+=
-'''
-#===================התפריט===========:============
 def Kid_():
-    kid1=[]
-    kid2=[]
-    Game_m = True
-    gameDisplay.fill(colors['white'])
-    message_display("Hello Kids")
-    Name_1,LastName_1=inpt(1)
-    Name_2,LastName_2=inpt(2)
-    datalist=read_from_xl('Date.xlsx')
-    p_1,p_2=0,0
-    Q_1,Q_2=0,0
-    level=1
-    type_game=0
-    games={1:'Ladders and snakes',2:'Checkers'}
-    gameDisplay.fill(colors['white'])
-    while Game_m:
-        
-        
+    ''' kid screen '''
+    name2 = None # a list. if there is another player- append to the list [first_name, last_name]
+    gameDisplay.blit(Background_menusImg, (0, 0))
+    text_center("Hello Kids!", display_width / 2, 50, 70)
+
+    #input firs name
+    text_center('Enter the first name and then press Enter', display_width / 2, 120, 40)
+    first_name1 = input_keybord(250, 150)
+    text_center('Enter the last name and then press Enter', display_width / 2, 220, 40)
+    last_name1 = input_keybord(250, 250)
+    loop_end = False
+    text_display('select level of quastion', 40, 420, 60)
+    player2_recorded = False # check if the child entered another player name
+    pressed = False
+    while not loop_end:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 QuitTheGame()
-                
-        gameDisplay.fill(colors['white'])
-        largeText = pygame.font.Font('freesansbold.ttf',80)
-        TextSurf, TextRect = text_objects("Select Level", largeText)
-        TextRect.center = ((display_width/2),(display_height/2-200))
-        gameDisplay.blit(TextSurf, TextRect)
-        mouse = pygame.mouse.get_pos()
-      
-        
-        #==(תפריט של ילד )====
-
-        if 1==button_2("age 6-8",340,230,125,60,colors['gray_l'],colors['gray'],'1'):   
-             level,p_1,p_2,Q_1,Q_2,type_game=Select_a_game(1)
-             kid1.extend([Name_1,LastName_1,p_1,Q_1,'age 6-8',games[type_game]])
-             kid2.extend([Name_2,LastName_2,p_2,Q_2,'age 6-8',games[type_game]])
-             datalist.append(kid1)
-             datalist.append(kid2)
-             write_to_xl('Date.xlsx',datalist)
-             main_menu()
-
-        if 2==button_2("age 8-10",340,300,125,60,colors['gray_l'],colors['gray'],'2'):
-             level,p_1,p_2,Q_1,Q_2,type_game=Select_a_game(2)
-             kid1.extend([Name_1,LastName_1,p_1,Q_1,'age 8-10',games[type_game]])
-             kid2.extend([Name_2,LastName_2,p_2,Q_2,'age 8-10',games[type_game]])
-             datalist.append(kid1)
-             datalist.append(kid2)
-             write_to_xl('Date.xlsx',datalist)
-             main_menu()
-
-        if 3==button_2("age 10-12",340,370,125,60,colors['gray_l'],colors['gray'],'3'):
-             level,p_1,p_2,Q_1,Q_2,type_game=Select_a_game(3)
-             kid1.extend([Name_1,LastName_1,p_1,Q_1,'age 10-12',games[type_game]])
-             kid2.extend([Name_2,LastName_2,p_2,Q_2,'age 10-12',games[type_game]])
-             datalist.append(kid1)
-             datalist.append(kid2)
-             write_to_xl('Date.xlsx',datalist)
-             main_menu()
-
-        if 4==button_2("Back",340,440,125,60,colors['red'],colors['red_l'],'4'):   
-             main_menu()      
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                pressed = True
+            elif event.type == pygame.MOUSEBUTTONUP:
+                pressed = False
+        if not player2_recorded and button('press here if there is another player', 90, 320, 620, 60, pressed,
+                  colors['gray_l'], colors['gray']):
+            gameDisplay.blit(Background_menusImg, (0, 0))
+            pygame.display.update()
+            name2 = []
+            text_center('Enter the first name and then press Enter', display_width / 2, 120, 40)
+            name2.append(input_keybord(250, 150))
+            text_center('Enter the last name and then press Enter', display_width / 2, 220, 40)
+            name2.append(input_keybord(250, 250))
+            text_display('select level of quastion', 40, 420, 60)
+            player2_recorded = True
+            pressed = False
+        button('age 6-8', 50, 500, 170, 60, pressed, colors['gray_l'], colors['gray'],
+               Select_a_game, 1, (first_name1, last_name1), name2)
+        button('age 8-10', 230, 500, 170, 60, pressed, colors['gray_l'], colors['gray'],
+               Select_a_game, 2, (first_name1, last_name1), name2)
+        button('age 10-12', 410, 500, 170, 60, pressed, colors['gray_l'], colors['gray'],
+               Select_a_game, 3, (first_name1, last_name1), name2)
+        button("Back", 650, 450, 125, 60, pressed, colors['gray_l'], colors['gray'], main_menu)
+        button("Exit", 650, 520, 125, 60, pressed, colors['red_l'], colors['red'], QuitTheGame)
         pygame.display.update()
-        clock.tick(15)
-        
-    
-def Parent_():
-    Game_m = True
-    KidList=None
-    gameDisplay.fill(colors['white'])
-    message_display("Enter the Password")
-    password=inpt(3)
-    if password == '123456' :
-        gameDisplay.fill(colors['white'])
-        message_display("Hello Parents")
-        Name_1,LastName_1=inpt(4)
-        gameDisplay.fill(colors['white'])     
-        KidList=find_kid(Name_1,LastName_1)
-        
-        if Name_1 in(KidList) and LastName_1 in(KidList):
-                gameDisplay.blit(data_P,(100,200))#טבלה
-                while Game_m:
-                    for event in pygame.event.get():
-                        if event.type == pygame.QUIT:
-                            QuitTheGame()
-                            
-                    gameDisplay.fill(colors['white'])
-                    gameDisplay.blit(dataP,(0,0))
-                    largeText = pygame.font.SysFont("comicsansms",60)
-                    TextSurf, TextRect = text_objects("Your kids results:", largeText)
-                    TextRect.center = ((display_width/2),(display_height/2-250))
-                    gameDisplay.blit(TextSurf, TextRect)
-                    
-                    
-                    button(str(KidList[0][0]),50,120,150,60,colors['gray_l'],colors['gray'])
-                    button(str(KidList[0][1]),200,120,150,60,colors['gray_l'],colors['gray'])
-                    
-                    for i in range(len(KidList)):
-                     Message_(str(i+1),640,220+(i*20))#מסד  
-                     Message_(str(KidList[i][5]),480,220+(i*20))  #שם משחק      
-                     Message_((str(KidList[i][2])+'/'+str(KidList[i][3])),300,220+(i*20))#כמות שאלות
-                     Message_(str(KidList[i][2]*2),160,220+(i*20))#ניקוד
-                     Message_(str(round((KidList[i][2]/KidList[i][3]),2)*100),30,220+(i*20))#ציון
-                     
-                       
+        clock.tick(60)
 
-                    button("Back",100,500,125,60,colors['gray_l'],colors['gray'],main_menu)
-                    button("Exit",595,500,125,60,colors['gray_l'],colors['gray'],QuitTheGame)
-                   
-                    pygame.display.update()
-                    clock.tick(15)
-        else:
-                message_display("WRONG Name Try Again")
-                time.sleep(1)
-    else:        
-        message_display("WRONG PASSWORD!")
-        time.sleep(1)        
+def Select_a_game(level_quastions, name1, name2 = None):
+    ''' select a game screen '''
+    end_loop = False
+    pressed = False
+    while not end_loop:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                QuitTheGame()
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                pressed = True
+            elif event.type == pygame.MOUSEBUTTONUP:
+                pressed = False
+
+        gameDisplay.blit(SelectGameImg,(0, 0))
+        if button("Ladders and snakes", 403, 410, 350, 60, pressed, colors['gray_l'],colors['gray']):
+            pressed = False
+            if name2 == None: # prevent situation that the child entered just one name
+                name2 = []
+                gameDisplay.blit(Background_menusImg, (0, 0))
+                text_center('Please enter the name of the second player', display_width / 2, 50, 44)
+                text_center('Enter the first name and then press Enter', display_width / 2, 120, 40)
+                name2.append(input_keybord(250, 150))
+                text_center('Enter the last name and then press Enter', display_width / 2, 220, 40)
+                name2.append(input_keybord(250, 250))
+            LaddersAndSnakes(level_quastions, name1, name2, main_menu)
+        button("Checkers", 45, 410, 350, 60, pressed, colors['gray_l'],colors['gray'],
+               rival, level_quastions, name1, name2, main_menu)
+        button("Back", 340, 230, 125, 60, pressed, colors['gray_l'], colors['gray'], main_menu)
+        button("Exit", 340, 300, 125, 60, pressed, colors['red_l'], colors['red'], QuitTheGame)
+        if image_button(helpImg, -2, 415, pressed):
+            instruction(Checkers_instructionImg)
+            pressed = False
+        if image_button(helpImg, 750, 415, pressed):
+            instruction(Ledders_instructionImg)
+            pressed = False
+        pygame.display.update()
+        clock.tick(60)
+
 def Counselor_():
-    ages=('age 6-8','age 8-10','age 10-12')
-    games=('Ladders and snakes','Checkers')
-    Game_m = True
-    gameDisplay.fill(colors['white'])
-    message_display("Hello Counselor")
-    Pass=inpt(3)
-    gameDisplay.fill(colors['white'])
-    #===)אימות סיסמא של יועץ חינוכי )====
-    if (Pass=="12345"):
-            while Game_m:
+    ''' counselor screen '''
+    ages = ('6-8', '8-10', '10-12')
+    games = ('Checkers', 'Ladders And Snakes')
+
+    for _ in range(3): # can try 3 times to enter a password
+        gameDisplay.blit(Background_menusImg, (0, 0))
+        text_center('Hello Counselor', display_width / 2, 100, 80)
+        text_center('enter a password', display_width / 2, 250, 60)
+        text_center('press Enter to finish', display_width / 2, 400, 30)
+        password = input_keybord(250, 300)
+
+        if password in counselor_pass:
+            loop_end = False
+            pressed = False
+            while not loop_end:
                 for event in pygame.event.get():
                     if event.type == pygame.QUIT:
                         QuitTheGame()
-                gameDisplay.fill(colors['white'])
-                gameDisplay.blit(dataC,(0,0))
-                largeText = pygame.font.SysFont("comicsansms",60)
-                TextSurf, TextRect = text_objects("The kids results:", largeText)
-                TextRect.center = ((display_width/2),(display_height/2-250))
-                gameDisplay.blit(TextSurf, TextRect)
+                    elif event.type == pygame.MOUSEBUTTONDOWN:
+                        pressed = True
+                    elif event.type == pygame.MOUSEBUTTONUP:
+                        pressed = False
+                gameDisplay.blit(Background_menusImg, (0, 0))
+                gameDisplay.blit(consulerImg, (25, 0))
 
                 for i in range(3):
-                     Message_(str(i+1),640,240+(i*20))#מסד  
-                     Message_(str(ages[i]),520,240+(i*20))       
-                     Message_(str(avg_per_age(ages[i],games[0])),310,240+(i*20))
-                     Message_(str(avg_per_age(ages[i],games[1])),90,240+(i*20))
-                #Message_(round(((avg_per_age(ages[0],games[0])+avg_per_age(ages[1],games[0])+avg_per_age(ages[2],games[0]))/3),2),400,500)
-                #Message_(round(((avg_per_age(ages[0],games[1])+avg_per_age(ages[1],games[1])+avg_per_age(ages[2],games[1]))/3),2),400,560)
-                button("Back",130,500,125,60,colors['gray_l'],colors['gray'],main_menu)
-                button("Exit",580,500,125,60,colors['gray_l'],colors['gray'],QuitTheGame)
-               
+                    text_display(str(i + 1), 730, 100 + (i * 100)) # serial namber of the rows
+                    text_display(str(ages[i]), 590, 100 + (i * 100)) # show the ages
+                    text_display(str(avg_per_age(ages[i], games[1], data_base)), 400, 100 + (i * 100)) # show average for each age for checkers
+                    text_display(str(avg_per_age(ages[i], games[0], data_base)), 150, 100 + (i * 100)) # show average for each age for ledders and snakes
+
+
+                text_display('average of math questions: ' + str(avg_per_game(games[1], data_base)), 100, 450, 30)
+                text_display('average of land of Israel questions: ' + str(avg_per_game(games[0], data_base)), 100, 500, 30)
+                button("Back", 650, 450, 125, 60, pressed, colors['gray_l'], colors['gray'], main_menu)
+                button("Exit", 650, 520, 125, 60, pressed, colors['red_l'], colors['red'], QuitTheGame)
+
                 pygame.display.update()
-                clock.tick(15)
-    else:
-            message_display("WRONG PASSWORD!")
+                clock.tick(60)
+        else:
+            gameDisplay.blit(Background_menusImg, (0, 0))
+            text_center("WRONG PASSWORD!", display_width / 2, display_height / 2, 80)
+            pygame.display.update()
             time.sleep(1)
-            
-            
-#==============================================
 
-                
-def main_menu():
-
-
-    gameDisplay.fill(colors['white'])
-    gameDisplay.blit(Logo,(0,0))
+    gameDisplay.blit(Background_menusImg, (0, 0))
+    text_center("you tried", display_width / 2, display_height / 2 - 50, 80)
+    text_center("too many times", display_width / 2, display_height / 2 + 50, 80)
     pygame.display.update()
-    time.sleep(4)
-    
-    
-    
-    
-    Game_m = True
-    while Game_m:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                QuitTheGame()
-                
-        gameDisplay.fill(colors['white'])
-        largeText = pygame.font.Font('freesansbold.ttf',80)
-        TextSurf, TextRect = text_objects("welcome", largeText)
-        TextRect.center = ((display_width/2),(display_height/2-200))
-        gameDisplay.blit(TextSurf, TextRect)
-        mouse = pygame.mouse.get_pos()
-        
-        button("kid",340,230,125,60,colors['gray_l'],colors['gray'],Kid_)
-        button("Parent",340,300,125,60,colors['gray_l'],colors['gray'],Parent_)                     
-        button("Counselor",340,370,125,60,colors['gray_l'],colors['gray'],Counselor_)
-        button("Exit",340,440,125,60,colors['red'],colors['red_l'],QuitTheGame)
+    time.sleep(1.5)
+    QuitTheGame()
 
+def Parent_():
+    ''' parent screen '''
+    ages = ('6-8', '8-10', '10-12')
+    for _ in range(3): # can try 3 times to enter a password
+        gameDisplay.blit(Background_menusImg, (0, 0))
+        text_center('Hello Parents', display_width / 2, 100, 80)
+        text_center('enter a password', display_width / 2, 250, 60)
+        text_center('press Enter to finish', display_width / 2, 400, 30)
+        password = input_keybord(250, 300)
 
-        pygame.display.update()
-        clock.tick(15)
-        
+        if password in parent_pass:
+            gameDisplay.blit(Background_menusImg, (0, 0))
+            text_center('enter first name', display_width / 2, 100, 60)
+            text_center('press Enter to finish', display_width / 2, 250, 30)
+            first_name = input_keybord(250, 150)
+            text_center('enter last name', display_width / 2, 350, 60)
+            text_center('press Enter to finish', display_width / 2, 500, 30)
+            last_name = input_keybord(250, 400)
+            pygame.display.set_mode((800, 700)) # for more space if there is a lot of grades
+            gameDisplay.blit(Background_menusLargeImg, (0, 0))
+            text_display("{0} {1}".format(first_name, last_name), 20, 5, 30) # show the name of the child
+            gameDisplay.blit(parentImg, (0, 40))
+            kid_games = find_kid_games(first_name, last_name, data_base) # list of all games of the child
+            text_display("average Math: {0}".format(int(avg_per_game('Ladders And Snakes', kid_games))), 300, 5, 30)
+            text_display("average Israel: {0}".format(int(avg_per_game('Checkers', kid_games))), 550, 5, 30)
+            i = 0
+            for row in kid_games:
+                i += 1
+                text_display(str(i), 770, 50 + (i * 30)) # serial number of the game
+                text_display(str(row[6]), 400, 50 + (i * 30)) # show the type of the quastions
+                text_display('{0}/{1}'.format(row[4], row[3]), 200, 50 + (i * 30)) # show the number of correct answers from the questions
+                text_display(str(int(grade_one_game(row))), 50, 50 + (i * 30)) # show the grade of one game
+            pressed = False
+            loop_end = False
+            while not loop_end:
+                for event in pygame.event.get():
+                    if event.type == pygame.QUIT:
+                        pygame.display.set_mode((display_width, display_height))
+                        QuitTheGame()
+                    elif event.type == pygame.MOUSEBUTTONDOWN:
+                        pressed = True
+                    elif event.type == pygame.MOUSEBUTTONUP:
+                        pressed = False
+                if image_button(menuButtonImg, 760, 45, pressed):
+                    pressed = False
+                    pygame.display.set_mode((display_width, display_height))
+                    main_menu()
+                pygame.display.update()
+                clock.tick(60)
+        else:
+            gameDisplay.blit(Background_menusImg, (0, 0))
+            text_center("WRONG PASSWORD!", display_width / 2, display_height / 2, 80)
+            pygame.display.update()
+            time.sleep(1)
+
+    gameDisplay.blit(Background_menusImg, (0, 0))
+    text_center("you tried", display_width / 2, display_height / 2 - 50, 80)
+    text_center("too many times", display_width / 2, display_height / 2 + 50, 80)
+    pygame.display.update()
+    time.sleep(1.5)
+    QuitTheGame()
+
 main_menu()
-#game_loop()
-pygame.quit()
-quit()
