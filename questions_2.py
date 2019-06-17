@@ -1,10 +1,10 @@
 from tools import*
 import tools
 #=============images=======================
-data_P=pygame.image.load('Pic\dataP.png')
-Q_IMG=pygame.image.load('Pic\Q.png')
-T_IMG=pygame.image.load('Pic\True.png')
-F_IMG=pygame.image.load('Pic\False.png')
+data_P=pygame.image.load('PicLaddersandsnakes\dataP.png')
+Q_IMG=pygame.image.load('PicLaddersandsnakes\Q.png')
+T_IMG=pygame.image.load('PicLaddersandsnakes\True.png')
+F_IMG=pygame.image.load('PicLaddersandsnakes\False.png')
 
 #==========================================
 Ques={1:(pygame.image.load('pic_Question\Q_ (1).png'),4),
@@ -70,7 +70,7 @@ Ques={1:(pygame.image.load('pic_Question\Q_ (1).png'),4),
 
 
       
-#==============(פונקציות שאלות)============
+#==============(qustions functions)============
 
 def Question(level):
         time.sleep(2)

@@ -116,7 +116,7 @@ def inpt(x):
     else:
         return keyboard(250,270)  
  
-#========= בחירת משחק ===========
+#========= choosing game ===========
 def Select_a_game(level):
     Game_m = True
     p_1,p_2,Q_1,Q_2=0,0,0,0
@@ -155,7 +155,7 @@ def Select_a_game(level):
 
                         
 #================================               
-#============שמירה של הנותנים====    
+#============save data====    
 
 
     
@@ -223,7 +223,7 @@ def avarage():
     for i in range(len(datalist)):
         sum+=
 '''
-#===================התפריט===========:============
+#===================menu===========:============
 def Kid_():
     kid1=[]
     kid2=[]
@@ -254,7 +254,7 @@ def Kid_():
         mouse = pygame.mouse.get_pos()
       
         
-        #==(תפריט של ילד )====
+        #==(child menu )====
 
         if 1==button_2("age 6-8",340,230,125,60,colors['gray_l'],colors['gray'],'1'):   
              level,p_1,p_2,Q_1,Q_2,type_game=Select_a_game(1)
@@ -303,7 +303,7 @@ def Parent_():
         KidList=find_kid(Name_1,LastName_1)
         
         if Name_1 in(KidList) and LastName_1 in(KidList):
-                gameDisplay.blit(data_P,(100,200))#טבלה
+                gameDisplay.blit(data_P,(100,200))#table
                 while Game_m:
                     for event in pygame.event.get():
                         if event.type == pygame.QUIT:
@@ -321,11 +321,11 @@ def Parent_():
                     button(str(KidList[0][1]),200,120,150,60,colors['gray_l'],colors['gray'])
                     
                     for i in range(len(KidList)):
-                     Message_(str(i+1),640,220+(i*20))#מסד  
-                     Message_(str(KidList[i][5]),480,220+(i*20))  #שם משחק      
-                     Message_((str(KidList[i][2])+'/'+str(KidList[i][3])),300,220+(i*20))#כמות שאלות
-                     Message_(str(KidList[i][2]*2),160,220+(i*20))#ניקוד
-                     Message_(str(round((KidList[i][2]/KidList[i][3]),2)*100),30,220+(i*20))#ציון
+                     Message_(str(i+1),640,220+(i*20))#screem  
+                     Message_(str(KidList[i][5]),480,220+(i*20))  #game name      
+                     Message_((str(KidList[i][2])+'/'+str(KidList[i][3])),300,220+(i*20))#number of questions
+                     Message_(str(KidList[i][2]*2),160,220+(i*20))#score
+                     Message_(str(round((KidList[i][2]/KidList[i][3]),2)*100),30,220+(i*20))#grade
                      
                        
 
@@ -348,7 +348,7 @@ def Counselor_():
     message_display("Hello Counselor")
     Pass=inpt(3)
     gameDisplay.fill(colors['white'])
-    #===)אימות סיסמא של יועץ חינוכי )====
+    #===)verify password )====
     if (Pass=="12345"):
             while Game_m:
                 for event in pygame.event.get():

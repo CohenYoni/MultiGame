@@ -9,18 +9,18 @@ row={1:display_height - 66,2:display_height - 123,3:display_height - 182,4:displ
 col={1:-5,2:52,3:109,4:165,5:224,6:279,7:339,8:395,9:452,10:510}
 
 #====Images===
-player1Img=pygame.image.load('Pic\player1.png')
-player2Img=pygame.image.load('Pic\player2.png')
-BoardGame=pygame.image.load('Pic\BoardGame.png')
-PicExit=pygame.image.load('Pic\Exit.png')
-Logo=pygame.image.load('Pic\Logo2.png')
-Selectagame=pygame.image.load('Pic\Select_a_game.png')
-cube1=pygame.image.load('Pic\cube_1.png')
-cube2=pygame.image.load('Pic\cube_2.png')
-cube3=pygame.image.load('Pic\cube_3.png')
-cube4=pygame.image.load('Pic\cube_4.png')
-cube5=pygame.image.load('Pic\cube_5.png')
-cube6=pygame.image.load('Pic\cube_6.png')
+player1Img=pygame.image.load('PicLaddersandsnakes\player1.png')
+player2Img=pygame.image.load('PicLaddersandsnakes\player2.png')
+BoardGame=pygame.image.load('PicLaddersandsnakes\BoardGame.png')
+PicExit=pygame.image.load('PicLaddersandsnakes\Exit.png')
+Logo=pygame.image.load('PicLaddersandsnakes\Logo2.png')
+Selectagame=pygame.image.load('PicLaddersandsnakes\Select_a_game.png')
+cube1=pygame.image.load('PicLaddersandsnakes\cube_1.png')
+cube2=pygame.image.load('PicLaddersandsnakes\cube_2.png')
+cube3=pygame.image.load('PicLaddersandsnakes\cube_3.png')
+cube4=pygame.image.load('PicLaddersandsnakes\cube_4.png')
+cube5=pygame.image.load('PicLaddersandsnakes\cube_5.png')
+cube6=pygame.image.load('PicLaddersandsnakes\cube_6.png')
 
 #=============Functions=========
 def new_player(playerImg):

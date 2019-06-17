@@ -19,24 +19,24 @@ panel_width = panel_height = 75
 ######################## IMAGES ########################
 
 #pygame.display.set_caption('Checkers')  # set title of the window
-#checkersIconImg = pygame.image.load('checkers_icon.png')
+#checkersIconImg = pygame.image.load('pic_Checkers/checkers_icon.png')
 #pygame.display.set_icon(checkersIconImg)
-BoardGameImg = pygame.image.load('checkerboard.png') # load background
-RivalImg = pygame.image.load('rival_screen.png') # load choose rival screen background
-DifficultyImg = pygame.image.load('difficulty.png') # load choose difficulty screen background
+BoardGameImg = pygame.image.load('pic_Checkers/checkerboard.png') # load background
+RivalImg = pygame.image.load('pic_Checkers/rival_screen.png') # load choose rival screen background
+DifficultyImg = pygame.image.load('pic_Checkers/difficulty.png') # load choose difficulty screen background
 
-blackPlayerImgs = {1: pygame.image.load('black_player.png'), 2: pygame.image.load('black_player.png'),
-                   3: pygame.image.load('black_player.png'), 4: pygame.image.load('black_player.png'),
-                   5: pygame.image.load('black_player.png'), 6: pygame.image.load('black_player.png'),
-                   7: pygame.image.load('black_player.png'), 8: pygame.image.load('black_player.png'),
-                   9: pygame.image.load('black_player.png'), 10: pygame.image.load('black_player.png'),
-                   11: pygame.image.load('black_player.png'), 12: pygame.image.load('black_player.png')}
-whitePlayerImgs = {1: pygame.image.load('white_player.png'), 2: pygame.image.load('white_player.png'),
-                   3: pygame.image.load('white_player.png'), 4: pygame.image.load('white_player.png'),
-                   5: pygame.image.load('white_player.png'), 6: pygame.image.load('white_player.png'),
-                   7: pygame.image.load('white_player.png'), 8: pygame.image.load('white_player.png'),
-                   9: pygame.image.load('white_player.png'), 10: pygame.image.load('white_player.png'),
-                   11: pygame.image.load('white_player.png'), 12: pygame.image.load('white_player.png')}
+blackPlayerImgs = {1: pygame.image.load('pic_Checkers/black_player.png'), 2: pygame.image.load('pic_Checkers/black_player.png'),
+                   3: pygame.image.load('pic_Checkers/black_player.png'), 4: pygame.image.load('pic_Checkers/black_player.png'),
+                   5: pygame.image.load('pic_Checkers/black_player.png'), 6: pygame.image.load('pic_Checkers/black_player.png'),
+                   7: pygame.image.load('pic_Checkers/black_player.png'), 8: pygame.image.load('pic_Checkers/black_player.png'),
+                   9: pygame.image.load('pic_Checkers/black_player.png'), 10: pygame.image.load('pic_Checkers/black_player.png'),
+                   11: pygame.image.load('pic_Checkers/black_player.png'), 12: pygame.image.load('pic_Checkers/black_player.png')}
+whitePlayerImgs = {1: pygame.image.load('pic_Checkers/white_player.png'), 2: pygame.image.load('pic_Checkers/white_player.png'),
+                   3: pygame.image.load('pic_Checkers/white_player.png'), 4: pygame.image.load('pic_Checkers/white_player.png'),
+                   5: pygame.image.load('pic_Checkers/white_player.png'), 6: pygame.image.load('pic_Checkers/white_player.png'),
+                   7: pygame.image.load('pic_Checkers/white_player.png'), 8: pygame.image.load('pic_Checkers/white_player.png'),
+                   9: pygame.image.load('pic_Checkers/white_player.png'), 10: pygame.image.load('pic_Checkers/white_player.png'),
+                   11: pygame.image.load('pic_Checkers/white_player.png'), 12: pygame.image.load('pic_Checkers/white_player.png')}
 
 ######################## VARIABLES ########################
 # odd row with even col, even row with odd col
@@ -131,9 +131,9 @@ def init_board():
 def get_king(color):
     '''load king image'''
     if color == 'black':
-        return pygame.image.load('king_black.png')
+        return pygame.image.load('pic_Checkers/king_black.png')
     elif color == 'white':
-        return pygame.image.load('king_white.png')
+        return pygame.image.load('pic_Checkers/king_white.png')
 
 def place_display(row, col, color, piece_id, king = False):
     '''place a piece image on the screen'''
